@@ -1,0 +1,27 @@
+
+header {
+  position: relative;
+}
+header div {
+  position: fixed;
+  top: 0px;
+}
+header {
+  padding-top: 10px;
+}
+footer {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: brown;
+}
+.skeleton {
+  position: absolute;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  top: -22px;
+  left: -2px;
+}
