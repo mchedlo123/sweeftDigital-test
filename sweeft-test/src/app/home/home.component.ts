@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   userDate: User[];
   allUser: any = [];
   page: number = 1;
-  size: number = 6;
+  size: number = 7;
+  isLargeSize: number = 0;
 
   isLoaded: boolean = true;
   constructor(
@@ -22,6 +23,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (window.innerHeight > 722 && window.innerWidth > 1536) {
+      this.isLargeSize = 0.8;
+    }
+
     this._mainService.getAllDate(this.page, this.size)
       .subscribe(
       (date: User[]) => {
@@ -46,7 +51,7 @@ export class HomeComponent implements OnInit {
     if (this.testDiv) {
       const rect = this.testDiv.nativeElement.getBoundingClientRect();
       const topShown = rect.top >= 0;
-      const bottomShown = rect.bottom <= window.innerHeight;
+      const bottomShown = rect.bottom <= window.innerHeight + this.isLargeSize;
       this.isTestDivScrolledIntoView = topShown && bottomShown;
       if (this.isTestDivScrolledIntoView) {
         this.page = this.page + 1;

@@ -12,12 +12,13 @@ export class DetailPageComponent implements OnInit, DoCheck {
   // @ts-ignore
   userId = this.route.url._value[2].path;
   page: number = 1;
-  size: number = 4;
+  size: number = 7;
   // @ts-ignore
   user: CertainUser;
   // @ts-ignore
   friend: User[];
   allUser: any = [];
+  isLargeSize: number = 0;
 
   isLoaded: boolean = true;
 
@@ -31,6 +32,10 @@ export class DetailPageComponent implements OnInit, DoCheck {
   ) { }
 
   ngOnInit(): void {
+    if (window.innerHeight > 722 && window.innerWidth > 1536) {
+      this.isLargeSize = 0.8;
+    }
+
     this._mainService.getUser(this.userId).subscribe(
       (date: CertainUser) => {
         setTimeout(() => {
@@ -64,7 +69,7 @@ export class DetailPageComponent implements OnInit, DoCheck {
     if (this.testDiv) {
       const rect = this.testDiv.nativeElement.getBoundingClientRect();
       const topShown = rect.top >= 0;
-      const bottomShown = rect.bottom <= window.innerHeight;
+      const bottomShown = rect.bottom <= window.innerHeight + this.isLargeSize;
       this.isTestDivScrolledIntoView = topShown && bottomShown;
       if (this.isTestDivScrolledIntoView) {
         this.page = this.page + 1;
